@@ -1,0 +1,49 @@
+version: '3'
+services:
+    redis:
+        image: redis
+        ports:
+            - "6379"
+
+    rabbit:
+        hostname: rabbit
+        image: rabbitmq:latest
+        environment:
+            - RABBITMQ_DEFAULT_USER=admin
+            - RABBITMQ_DEFAULT_PASS=mypass
+        ports:
+            - "5673:5672"
+
+    worker:
+        build:
+            context: .
+            dockerfile: dockerfile
+        volumes:
+            - .:/app
+        links:
+            - rabbit
+            - redis
+            - elasticsearch
+        depends_on:
+            - rabbit
+            - redis
+            - elasticsearch
+        ports:
+            - "5555:5555"
+            - "5000:5000"
+
+    elasticsearch: # Elasticsearch Instance
+        container_name: elasticsearch
+        image: docker.elastic.co/elasticsearch/elasticsearch:6.1.1
+        volumes: # Persist ES data in seperate "esdata" volume
+            - esdata:/usr/share/elasticsearch/data
+        environment:
+            - bootstrap.memory_lock=true
+            - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+            - discovery.type=single-node
+        ports: # Expose Elasticsearch ports
+            - "9300:9300"
+            - "9200:9200"
+
+volumes: # Define seperate volume for Elasticsearch data
+  esdata:

@@ -1,0 +1,6 @@
+Flask
+Celery
+gunicorn
+Redis
+elasticsearch
+flower

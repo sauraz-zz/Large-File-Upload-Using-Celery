@@ -1,0 +1,8 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+	<p>{{message}}</p><br>
+    <form action="/cancel" method="POST" ><button class="btn btn-danger" type="submit" name="transaction_id" value="{{  transaction_id  }}">Cancel Upload</button> </form>
+
+    <form action="/delete" method="POST" ><button class="btn btn-danger" type="submit" name="transaction_id" value="{{  transaction_id  }}">Delete Data</button> </form>
+{% endblock %}
