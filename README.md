@@ -29,7 +29,7 @@ Kibana
 4. kubectl get services
 5. kubectl expose deployment worker --name=social --type=NodePort
 6. kubectl expose deployment elasticsearch --name=es --type=NodePort
-7. machine ip (get ip addr of machine)
+7. minikube ip (get ip addr of machine)
 8. kubectl describe service social (get NodePort port-1  for gunicorn flask)
 9. kubectl describe service social (get NodePort port-2  for flower)
 10. kubectl describe service es (get NodePort port-2  for elasticsearch)
@@ -37,8 +37,8 @@ Kibana
 
 ### Visit website:
 ```
-1. Flask web server - <machineip>:<NodePort port-1>
-2. Flower CeleryMonitoring - <machineip>:<NodePort port-2>
-3. ElasticSearch - <machineip>:<NodePort port-2>/docs/_search
+1. Flask web server - <minikubeip>:<NodePort port-1>
+2. Flower CeleryMonitoring - <minikubeip>:<NodePort port-2>
+3. ElasticSearch - <minikubeip>:<NodePort port-2>/docs/_search
 ```
 
